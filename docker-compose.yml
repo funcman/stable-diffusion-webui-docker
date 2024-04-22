@@ -31,6 +31,7 @@ services:
     build: ./services/AUTOMATIC1111
     image: sd-auto:72
     environment:
+      - HF_ENDPOINT=https://hf-mirror.com
       - CLI_ARGS=--allow-code --medvram --xformers --enable-insecure-extension-access --api
 
   auto-cpu:
@@ -38,6 +39,7 @@ services:
     profiles: ["auto-cpu"]
     deploy: {}
     environment:
+      - HF_ENDPOINT=https://hf-mirror.com
       - CLI_ARGS=--no-half --precision full --allow-code --enable-insecure-extension-access --api
 
   invoke: &invoke
@@ -46,6 +48,7 @@ services:
     build: ./services/invoke/
     image: sd-invoke:30
     environment:
+      - HF_ENDPOINT=https://hf-mirror.com
       - PRELOAD=true
       - CLI_ARGS=--xformers
 
@@ -62,6 +65,7 @@ services:
     build: ./services/comfy/
     image: sd-comfy:6
     environment:
+      - HF_ENDPOINT=https://hf-mirror.com
       - CLI_ARGS=
 
 
@@ -70,4 +74,5 @@ services:
     profiles: ["comfy-cpu"]
     deploy: {}
     environment:
+      - HF_ENDPOINT=https://hf-mirror.com
       - CLI_ARGS=--cpu
